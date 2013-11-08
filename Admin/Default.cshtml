@@ -1,0 +1,43 @@
+﻿@{
+    Layout = "~/Admin/_AdminLayout.cshtml";
+    Page.Title = "Admin Home"; 
+    
+}
+
+@{
+    if (!WebSecurity.IsAuthenticated) {
+        Response.Redirect("~/Admin/login?returnUrl=" + Request.Url.LocalPath);
+        
+    }
+    
+}
+
+
+<section role="main">
+    <div class="large-6 columns-centered push-3">
+        <fieldset>
+            <legend>Control Panel</legend>
+            <div class="row">
+                <ul class="circle">
+                    @if (Permissions.User(Can.CreateUser))
+                    {
+                        <li><a href="~/Admin/Users/AddUser">Add User</a></li>
+                    }
+                    @if (Permissions.User(Can.EditMenuItems, Can.DeleteUser))
+                    {
+                        <li><a href="~/Admin/Users/List">Manage User</a></li>
+                    }
+                    @if (Permissions.User(Can.CreateRole))
+                    {
+                        <li><a href="~/Admin/Users/AddRole">Add Role</a></li>
+                    }
+                    @if (Permissions.User(Can.ManageRolesPermissions))
+                    {
+                        <li><a href="~/Admin/Users/RolePermissions">Manage Role Permissions</a></li>
+                    }
+                </ul>
+            </div>
+        </fieldset>
+    </div>
+</section>
+

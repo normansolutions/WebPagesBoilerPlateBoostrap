@@ -1,0 +1,78 @@
+﻿@{
+    Layout = "_SiteLayout.cshtml";
+    Page.Title = "Contact";
+
+    //// Setup validation
+    Validation.RequireField("name", "Please enter your name.");
+    Validation.RequireField("email", "Please specify an email address.");
+    Validation.Add("email",
+        Validator.Regex(@"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$",
+        "Invalid format for an email address")
+        );
+    Validation.RequireField("message", "Please enter a message.");
+}
+
+
+
+@if (IsPost)
+{
+
+
+    if (Validation.IsValid())
+    {
+
+        try
+        {
+            AntiForgery.Validate();
+            var Name = Request.Form["name"];
+            var Email = Request.Form["email"];
+            var Message = Request.Form["message"];
+
+            WebMail.SmtpServer = "";
+
+            WebMail.Send(
+                to: "",
+                from: Email,
+                subject: "",
+                body: Name + " " + "said: " + Message
+                );
+
+            Response.Redirect("MessageThanks");
+        }
+        catch (Exception ex)
+        {
+            if (!(ex is System.Threading.ThreadAbortException))
+            {
+                Response.Redirect("Error");
+            }
+        }
+    }
+}
+<section>
+    <div class="large-8 columns">
+        <form name="contactForm" method="post">
+            <div class="row">
+                <div class="eight columns centered">
+                    <fieldset>
+                        <legend>Contact Form</legend>
+                        <label>Name</label>@Html.ValidationMessage("name")
+                        <input name="name" type="text" placeholder="Please enter your name" @Validation.For("name")>
+                        <label>Email Address</label>@Html.ValidationMessage("email")
+                        <input name="email" type="email" placeholder="Please enter your email address" @Validation.For("email")>
+                        <label>Message</label>
+                        @Html.ValidationMessage("message")
+                        <textarea name="message" id="message" @Validation.For("message")></textarea>
+
+                        <input type="submit" value="Submit" class="submit button" />
+                        <br />
+                        <br />
+                        <p>Please use the above contact form, or if you prefer, you can send an email directly to <a href="mailto:?Subject=Website Enquiry"></a></p>
+                    </fieldset>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+@section baseScript{
+    @System.Web.Optimization.Scripts.Render("~/bundles/validate")
+}

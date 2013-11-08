@@ -1,0 +1,9 @@
+﻿@{
+    WebSecurity.Logout();
+    var returnUrl = Request.QueryString["ReturnUrl"];
+    if (returnUrl.IsEmpty()) {
+        Response.Redirect("~/Admin/Login");
+    } else {
+        Context.RedirectLocal(returnUrl);
+    }
+}

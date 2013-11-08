@@ -1,0 +1,12 @@
+﻿@{
+    var service = new TweetSharp.TwitterService("", "");
+    service.AuthenticateWith("", "");
+
+    var options = new TweetSharp.ListTweetsOnUserTimelineOptions { ScreenName = "", Count = 10, TrimUser = true };
+    string tweetResult = "";
+
+    tweetResult = Json.Encode(service.ListTweetsOnUserTimeline(options));
+
+    Response.ContentType = "application/json";
+    Response.Write(tweetResult);
+}

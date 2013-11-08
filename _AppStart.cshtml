@@ -1,0 +1,37 @@
+﻿@using System.Web.Optimization;
+
+@{
+    App.Database = "MainDB";
+    WebSecurity.InitializeDatabaseConnection((string)App.Database, "Users", "UserId", "UserName", true);
+}
+
+@{
+    var bundles = BundleTable.Bundles;
+
+    //javaScript
+
+
+    bundles.Add(new ScriptBundle("~/bundles/js").Include(
+                "~/js/release/bootstrap.js",
+                "~/js/release/plugins/jquery.cookiebar.js",
+                "~/js/release/mainScript.js"
+                ));
+
+    bundles.Add(new ScriptBundle("~/bundles/tweet").Include(
+                "~/js/release/plugins/jquery.timeago.js",
+                "~/js/release/tweet.js"
+                ));
+
+
+    bundles.Add(new ScriptBundle("~/bundles/validate").Include(
+           "~/js/release/plugins/jquery.validate.js",
+           "~/js/release/plugins/jquery.validate.unobtrusive.js"));
+
+    //css
+
+
+    bundles.Add(new StyleBundle("~/bundles/style").Include(
+                "~/css/style.css"
+                ));
+
+}

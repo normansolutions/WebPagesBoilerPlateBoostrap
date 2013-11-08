@@ -1,0 +1,161 @@
+﻿/*:::: Main Stylesheet ::::*/
+
+@import url('less\colors.less'); // Site-wide colors
+@import url('less\fonts.less'); // Site-wide fonts
+@import url('less\mixins.less'); // Mixins
+@import url('less\validate.less'); // Validate
+/*:::: YOUR STYLES HERE ::::*/
+
+/*Admin*/
+
+#RoleId, #Role {
+    font-size: @selectBox;
+}
+
+.inline-control-label {
+    display: inline;
+    padding-left: 10px;
+}
+
+
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html,
+body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by its height */
+    margin: 0 auto -60px;
+    /* Pad bottom by footer height */
+    padding: 0 0 60px;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+    height: 60px;
+    background-color: #f5f5f5;
+}
+
+/* Not required for template or sticky footer method. */
+
+#wrap > .container {
+    padding: 60px 15px 0;
+}
+
+.container .credit {
+    margin: 20px 0;
+}
+
+#footer > .container {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+
+
+/*Cookie Bar*/
+
+#cookie-bar {
+    background: @black;
+    height: 24px;
+    line-height: 24px;
+    color: #eeeeee;
+    text-align: center;
+    padding: 3px 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+
+    #cookie-bar p {
+        margin: 0;
+        padding: 0;
+    }
+
+    #cookie-bar a {
+        color: @white;
+        display: inline-block;
+        border-radius: 3px;
+        text-decoration: none;
+        padding: 0 6px;
+        margin-left: 8px;
+    }
+
+    #cookie-bar .cb-enable {
+        background: #007700;
+    }
+
+        #cookie-bar .cb-enable:hover {
+            background: #009900;
+        }
+
+    #cookie-bar .cb-disable {
+        background: #990000;
+    }
+
+        #cookie-bar .cb-disable:hover {
+            background: #bb0000;
+        }
+
+    #cookie-bar .cb-policy {
+        background: #0033bb;
+    }
+
+        #cookie-bar .cb-policy:hover {
+            background: #0055dd;
+        }
+
+
+/*Twitter*/
+
+#panelTwit {
+    height: 100px;
+}
+
+    #panelTwit #tweets {
+        height: 8em;
+        overflow-y: hidden;
+        line-height: 1.5em;
+        font-size: .9em;
+    }
+
+        #panelTwit #tweets > li {
+            height: 8em;
+            padding: 7px 3px 3px 3px;
+            list-style: none;
+            font-size: 1.1em;
+            -webkit-text-shadow: 2px 4px 6px @shadowText;
+            text-shadow: 2px 4px 6px @shadowText;
+        }
+
+.bottom-shadow {
+    background: url(../img/bottomShadow.png) no-repeat;
+    width: 150px;
+    height: 14px;
+    margin-top: -22px;
+    left: 1px;
+}
+
+.quotes {
+    padding-top: 7px;
+    margin-left: 7px;
+    position: absolute;
+}
+
+
+/*:::: No styles below this line ::::*/
+@import url('less\helpers.less'); // Helper classes
+@import url('less\print.less'); // Print styles

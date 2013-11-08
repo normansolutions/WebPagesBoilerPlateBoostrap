@@ -1,0 +1,48 @@
+﻿@{
+    Layout = "~/Admin/_AdminLayout.cshtml";
+    Page.Title = "Login";
+    Validation.RequireField("UserName", "You must enter a username <br/><br/>");
+    Validation.RequireField("Password", "You must enter a password <br/><br/>");
+    var username = Request["UserName"];
+    var password = Request["Password"];
+    var rememberMe = Request.Form["RememberMe"].AsBool();
+
+    if (IsPost)
+    {
+        if (WebSecurity.Login(username, password, rememberMe))
+        {
+            var returnUrl = Request.QueryString["ReturnUrl"];
+            if (returnUrl.IsEmpty())
+            {
+                Response.Redirect("~/Admin/Default");
+            }
+            else
+            {
+                Context.RedirectLocal(returnUrl);
+            }
+        }
+        else
+        {
+            ModelState.AddFormError("The user name or password provided is incorrect.");
+        }
+    }
+}
+
+<section role="main">
+    <div class="large-6 columns-centered push-3">
+        @Html.ValidationSummary(true)
+        <form method="post">
+            <fieldset>
+                <legend>Log In</legend>
+                @ControlGroup.TextBox("User Name: ", "UserName")
+                @ControlGroup.Password("Password: ", "Password")
+                @ControlGroup.InlineCheckBox("Remember Me ", "RememberMe", rememberMe, new { @value = "true" })
+                @ControlGroup.Button(text: "Log In")
+            </fieldset>
+        </form>
+    </div>
+</section>
+
+@section baseScript{
+    @System.Web.Optimization.Scripts.Render("~/bundles/validate")
+}

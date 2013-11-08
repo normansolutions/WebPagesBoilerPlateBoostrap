@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "~/Admin/_AdminLayout.cshtml";
+    Page.Title = "Add Role"; 
+    
+}
+
+
+@{
+    Check.User(Can.CreateRole);
+
+    Validation.RequireField("RoleName");
+
+    if (IsPost && Validation.IsValid())
+    {
+        var roleName = Request["RoleName"];
+        Roles.CreateRole(roleName);
+        Response.Redirect("~/Admin/Users/RolePermissions/");
+    }
+}
+
+<form method="post">
+    <div class="large-6 columns-centered push-3">
+        <fieldset>
+            <legend>Add Role</legend>
+            @ControlGroup.TextBox("Role Name", "RoleName")
+            @ControlGroup.Button()
+        </fieldset>
+    </div>
+</form>

@@ -1,0 +1,28 @@
+﻿@black: #272727;
+@white: #f7f7f7;
+
+/*:::: Typography ::::*/
+@headline: #202020;
+@bodytype: #505050;
+@link: #0A457D;
+@vlink: #095B90;
+@hlink: #2E75AD;
+@shadowText: rgba(0,0,0,0.3);
+
+
+/*:::: Validation ::::*/
+@errorColor:#fc8888;
+
+/*:::: Subtle Color Scheme ::::*/
+@base: #663333;
+@lighter1: lighten(spin(@base, 5), 10%);
+@lighter2: lighten(spin(@base, 10), 20%);
+@darker1: darken(spin(@base, -5), 10%);
+@darker2: darken(spin(@base, -10), 20%);
+
+/*:::: Complementary Color Scheme ::::*/
+@base: #663333;
+@complement1: spin(@base, 180);
+@complement2: darken(spin(@base, 180), 5%);
+@lighten1: lighten(@base, 15%);
+@lighten2: lighten(@base, 30%);

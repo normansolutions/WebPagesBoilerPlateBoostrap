@@ -1,0 +1,51 @@
+﻿@using System.Text.RegularExpressions;
+
+@{
+    Layout = "~/Admin/_AdminLayout.cshtml";
+    Page.Title = "Create Admin"; 
+    
+}
+
+
+@{
+    var path = Server.MapPath("~/App_Data/");
+    var db = Database.Open((string)App.Database);
+    var commandText = @"SELECT COUNT(1) FROM Users";
+    if ((int)db.QueryValue(commandText) > 0)
+    {
+        Response.SetStatus(HttpStatusCode.BadRequest);
+    }
+    Validation.RequireField("UserName");
+    Validation.RequireField("Password", "Password cannot be empty");
+    Validation.Add("Password2",
+        Validator.Required("Put your password in here again"),
+        Validator.EqualsTo("Password", "Doesn't match")
+        );
+    if (IsPost && Validation.IsValid())
+    {
+
+        var username = Request["UserName"];
+        var password = Request["Password"];
+        WebSecurity.CreateUserAndAccount(username, password);
+
+        Roles.AddUsersToRoles(new[] { username }, new[] { "Administrator" });
+        Response.Redirect("~/Admin");
+    }
+}
+<section role="main">
+    <div class="large-6 columns-centered push-3">
+        <form method="post">
+            <div>
+                <h3>Create Admin</h3>
+            </div>
+            <div>
+                @ControlGroup.TextBox("User Name: ", "UserName")
+                @ControlGroup.Password("Password: ", "Password")
+                @ControlGroup.Password("Confirm Password: ", "Password2")
+            </div>
+            <div class="modal-footer">
+                @ControlGroup.Button(text: "Create User")
+            </div>
+        </form>
+    </div>
+</section>
